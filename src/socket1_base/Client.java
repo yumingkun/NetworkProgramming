@@ -1,4 +1,4 @@
-package socket_base1;
+package socket1_base;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,35 +6,53 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
 
-public class Server {
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Client {
 
     public static void main(String[] args) {
-        int port = 8848;
 
-        ServerSocket serverSocket = null;
+
+//		String ip="192.168.1.89";
+        //获取当前主机IP地址
+        InetAddress ipAddress = null;
+        String ip = "";
+        try {
+            ipAddress = InetAddress.getLocalHost();
+            ip = ipAddress.getHostAddress();
+            System.out.println(ip);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+
+        int port = 8848;
         Socket socket = null;
         BufferedReader br = null;
         PrintWriter pw = null;
 
         try {
-            serverSocket = new ServerSocket(port);//创建服务，指定端口号
-            System.out.println("服务器启动");
-            socket = serverSocket.accept();//监听客户端链接，客户端链接后，实例化socket
 
-            //实例化输入输出
+            socket = new Socket(ip, port);
+            System.out.println("已经连接到服务器");
+
             br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
             pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8")));
 
-            String str = br.readLine();
-            System.out.println("客户端信息：" + str);
 
-            String rtn = "服务器返回的信息" + str;
-
-            pw.println(rtn);
+            //发送给服务器
+            String send = "hello";
+            pw.println(send);
             pw.flush();
+
+
+            //服务器回复
+            String str = br.readLine();
+            System.out.println( str);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -49,14 +67,11 @@ public class Server {
                 if (socket != null) {
                     pw.close();
                 }
-                if (serverSocket != null) {
-                    pw.close();
-                }
+
             } catch (Exception e2) {
 
             }
         }
-
     }
 
 }
