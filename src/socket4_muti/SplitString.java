@@ -1,0 +1,1 @@
+package socket4_muti;/** * Created by mingkunyu on 2019-06-30 * 分割字符串 */public class SplitString {    public static void main(String[] args) {        String string="yu_123_adc";        String[] strings=string.split("\\_");        for (int i = 0; i <strings.length; i++) {            System.out.println(strings[i]);        }    }}
