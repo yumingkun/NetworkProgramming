@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/socket3_isEven/Client.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket3_isEven/Server.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/socket4_muti/Client.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/socket4_muti/Server.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

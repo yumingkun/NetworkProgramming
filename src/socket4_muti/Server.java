@@ -9,6 +9,9 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * 多客户端监听
+ */
 public class Server {
 
     public static void main(String[] args) {
@@ -19,10 +22,10 @@ public class Server {
         try {
             serverSocket = new ServerSocket(port);
             System.out.println("服务器已开启");
-            while (true) { //监听多个客户端连接
+            while (true) { //监听多个客户端的连接
                 socket = serverSocket.accept();
-                System.out.println("客户端连接信息：" + socket);
-                //开启新线程，用户与数据的交互
+                System.out.println("客户端信息：" + socket);
+                //每一个客户端 开启自己的新线程去数据交互
                 new SocketThread(socket).start();
 
             }
@@ -41,7 +44,7 @@ public class Server {
 
     }
 
-    //建立新的线程，用于循环监听，执行客户端的数据交互
+    //每一个用户线程 用于循环监听客户端输入并返回处理结果
     static class SocketThread extends Thread {
         BufferedReader br = null;
         PrintWriter pw = null;
@@ -57,17 +60,17 @@ public class Server {
                 br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8")));
 
-                while (true) {
+                while (true) {//循环监听
                     String str = br.readLine();
-                    System.out.println("�ͻ��˷���������" + str);
+                    System.out.println("客户端：" + str);
 
                     String rtn = "";
                     int num = Integer.parseInt(str);
                     if (test(num)) {
-                        rtn = "�������ظ���" + num + "��ż��";
+                        rtn =  num + "是偶数";
 
                     } else {
-                        rtn = "�������ظ���" + num + "������";
+                        rtn =  num + "是奇数";
                     }
                     pw.println(rtn);
                     pw.flush();
