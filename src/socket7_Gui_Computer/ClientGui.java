@@ -1,6 +1,5 @@
-package socket6_Gui_Cmd;
+package socket7_Gui_Computer;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -31,12 +30,18 @@ public class ClientGui extends JFrame {
 	public JButton buttonLogin;
 	public JButton buttonExit;
 	public JPanel panel_1;
-	public JButton btnSend;
 	public JLabel label_1;
 
 	ClientThread ctThread;
-	public JTextField textsend;
 	public JTextField textSu;
+	public JLabel label_2;
+	public JLabel label_3;
+	public JTextField textNum1;
+	public JTextField textNum2;
+	public JButton button;
+	public JButton button_1;
+	public JButton button_2;
+	public JButton button_3;
 
 	/**
 	 * Launch the application.
@@ -59,7 +64,7 @@ public class ClientGui extends JFrame {
 	 */
 	public ClientGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 567, 317);
+		setBounds(100, 100, 567, 390);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -104,45 +109,61 @@ public class ClientGui extends JFrame {
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "\u64CD\u4F5C", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(10, 111, 531, 139);
+		panel_1.setBounds(10, 111, 531, 231);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 
-		btnSend = new JButton("\u53D1\u9001");
-		btnSend.addActionListener(new BtnNewButtonActionListener());
-		btnSend.setBounds(438, 23, 68, 28);
-		panel_1.add(btnSend);
-
 		label_1 = new JLabel("\u64CD\u4F5C\u7ED3\u679C");
-		label_1.setBounds(10, 72, 54, 15);
+		label_1.setBounds(10, 164, 54, 15);
 		panel_1.add(label_1);
-
-		textsend = new JTextField();
-		textsend.setBounds(12, 21, 399, 30);
-		panel_1.add(textsend);
-		textsend.setColumns(10);
-
+		
 		textSu = new JTextField();
-		textSu.setBounds(10, 97, 401, 32);
+		textSu.setBounds(10, 185, 215, 36);
 		panel_1.add(textSu);
 		textSu.setColumns(10);
+		
+		label_2 = new JLabel("\u64CD\u4F5C\u65701");
+		label_2.setBounds(10, 36, 54, 15);
+		panel_1.add(label_2);
+		
+		label_3 = new JLabel("\u64CD\u4F5C\u65702");
+		label_3.setBounds(10, 99, 54, 15);
+		panel_1.add(label_3);
+		
+		textNum1 = new JTextField();
+		textNum1.setBounds(10, 53, 215, 36);
+		panel_1.add(textNum1);
+		textNum1.setColumns(10);
+		
+		textNum2 = new JTextField();
+		textNum2.setBounds(10, 118, 215, 36);
+		panel_1.add(textNum2);
+		textNum2.setColumns(10);
+		
+		button = new JButton("\u51CF\u6CD5-");
+		button.addActionListener(new ButtonActionListener());
+		button.setBounds(416, 53, 93, 61);
+		panel_1.add(button);
+		
+		button_1 = new JButton("\u52A0\u6CD5+");
+		button_1.addActionListener(new Button_1ActionListener());
+		button_1.setBounds(289, 53, 93, 61);
+		panel_1.add(button_1);
+		
+		button_2 = new JButton("\u4E58\u6CD5*");
+		button_2.addActionListener(new Button_2ActionListener());
+		button_2.setBounds(289, 160, 93, 61);
+		panel_1.add(button_2);
+		
+		button_3 = new JButton("\u9664\u6CD5/");
+		button_3.addActionListener(new Button_3ActionListener());
+		button_3.setBounds(416, 160, 93, 61);
+		panel_1.add(button_3);
 	}
 
 	/**
-	 * 发送消息
-	 *
-	 * @author Administrator
-	 *
-	 */
-	private class BtnNewButtonActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			ctThread.sendMessage(textsend.getText().trim());
-		}
-	}
-
-	/**
-	 * 客户端登录
-	 *
+	 * 登录
+	 * 
 	 * @author Administrator
 	 *
 	 */
@@ -158,7 +179,6 @@ public class ClientGui extends JFrame {
 				socket = new Socket(ip, port);
 				System.out.println("已经连接到服务器：");
 				textSu.setText("已经连接到服务器");
-
 				ctThread=new ClientThread(socket);
 				ctThread.start();
 			} catch (IOException e) {
@@ -174,15 +194,63 @@ public class ClientGui extends JFrame {
 	 */
 	private class ButtonExitActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-
+			
 			ctThread.sendMessage("CLOSE");
 		}
 	}
-
-
+	
+	
 	/**
-	 * 与服务器数据交互
+	 * 加法
+	 * @author Administrator
+	 *
 	 */
+	private class Button_1ActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			String num1=textNum1.getText().trim();
+			String num2=textNum2.getText().trim();
+			ctThread.sendMessage("+"+"|"+num1+"|"+num2);
+		}
+	}
+	/**
+	 * 减法
+	 * @author Administrator
+	 *
+	 */
+	private class ButtonActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			String num1=textNum1.getText().trim();
+			String num2=textNum2.getText().trim();
+			ctThread.sendMessage("-"+"|"+num1+"|"+num2);
+		}
+	}
+	/**
+	 * 乘法
+	 * @author Administrator
+	 *
+	 */
+	private class Button_2ActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			String num1=textNum1.getText().trim();
+			String num2=textNum2.getText().trim();
+			ctThread.sendMessage("*"+"|"+num1+"|"+num2);
+		}
+	}
+	
+	/**
+	 * 除法
+	 * @author Administrator
+	 *
+	 */
+	private class Button_3ActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			String num1=textNum1.getText().trim();
+			String num2=textNum2.getText().trim();
+			ctThread.sendMessage("/"+"|"+num1+"|"+num2);
+		}
+	}
+	
+
 	class ClientThread extends Thread {
 		Socket socket = null;
 		BufferedReader br = null;
@@ -196,12 +264,11 @@ public class ClientGui extends JFrame {
 			try {
 				br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
 				pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8")));
-
-				System.out.println(br.readLine()+"客户端信息");
-
-
-				while ((br.readLine())!=null) {
-					textSu.setText(br.readLine());
+ 
+			 
+				String str;
+				while ((str=br.readLine())!=null) {
+					textSu.setText(str);
 				}
 
 			} catch (Exception e) {
@@ -233,5 +300,4 @@ public class ClientGui extends JFrame {
 		}
 
 	}
-
 }
