@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/socket0_thread/cave/Cave.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/socket3_isEven/Client.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket3_isEven/Server.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket4_muti/Client.java" charset="UTF-8" />
@@ -8,14 +9,9 @@
     <file url="file://$PROJECT_DIR$/src/socket5_cmd/Client.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket5_cmd/Server.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket6_Gui_Cmd/ServerGUI.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/socket6_Gui_Cmd/ServerGUI.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/socket6_Gui_Cmd/ServerGUI.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/socket6_Gui_Cmd/SocketGUIServer2.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket7_Gui_Computer/ClientGui.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket7_Gui_Computer/ServerGUI.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/socket8_Gui_UsersChat/聊天程序流程说明.txt" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/socketGui/ServerGUI.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/socketGui/SocketGUIServer2.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
