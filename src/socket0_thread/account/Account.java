@@ -32,6 +32,8 @@ public class Account {
 		}
 		else {
 			System.out.println(name+"取钱失败");
+
+
 		}
 //		}
 	}
